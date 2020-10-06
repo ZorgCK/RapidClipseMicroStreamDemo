@@ -1,189 +1,35 @@
-<link rel="import" href="../styles/custom-theme-4.html">
-<link rel="import" href="../styles/custom-button.html">
-<link rel="import" href="../styles/custom-grid.html">
-<link rel="import" href="../styles/custom-text-area.html">
-<link rel="import" href="../styles/custom-text-field.html">
-<link rel="import" href="../styles/custom-group.html">
-<link rel="import" href="../styles/custom-select.html">
 <custom-style>
-<style>
-	html {
-		--my-custom-line-height: 60px;
-		--secondary-background-color: #f2f3f8;
-		--lumo-required-field-indicator: "*";
-		
-	/* 	--lumo-header-text-color: var(--lumo-contrast-80pct); */
-	/* 	--lumo-body-text-color: hsla(214, 40%, 16%, 0.94); */
-		--lumo-secondary-text-color: var(--lumo-contrast-80pct);
-		--lumo-tertiary-text-color: var(--lumo-contrast-70pct);
-		--lumo-disabled-text-color: var(--lumo-contrast-60pct);
-		
-	}
+  <style>
 
-	vaadin-vertical-layout {
-		overflow-y: hidden;
-	}
-	
-	vaadin-horizontal-layout {
-		overflow: hidden;
-	}
-	
-	vaadin-grid {
-		flex-basis: 0;
-	}
-
-	.c-visibility-hidden {
-		visibility: hidden;
-	}
-	
-	
-	.c-lbl-headline {
-		font-size: 1.3em;
-		font-weight: bold;
-	}
-	
-	.c-lbl-pageHeader {
-		color: var(--lumo-base-color);
-		/* 			background-color: var(--lumo-contrast); */
-		background-color: var(--lumo-primary-color);
-		padding: var(--lumo-space-wide-m);
-	}
-	
-	.c-lbl-as-formitem0 {
-		font-size: var(--lumo-font-size-s);
-		color: var(--lumo-secondary-text-color);
-	}
-	
-	.c-lbl-as-formitem {
-		max-width: 8em;
-		font-size: var(--lumo-font-size-s);
-		min-width: 8em;
-		color: var(--lumo-secondary-text-color);
-	}
-	
-	.c-lbl-as-messageitem {
-		white-space: pre-wrap;
-		word-wrap: break-word;
-		overflow-wrap: break-word;
-		-moz-hyphens: auto;
-		-webkit-hyphens: auto;
-		-ms-hyphens: auto;
-		hyphens: auto;
-		background-color: lightgray;
-		border-radius: var(--lumo-border-radius);
-		margin-bottom: 0.5em;
-	}
-	
-	.c-cell {
-		min-height: var(--lumo-size-s);
-		line-height: 22px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-	
-	
-	.esra-wl-tag {
-		height: calc(var(--lumo-icon-size-s) + .2rem);
-		width: 4rem;
-		border-radius: 1rem;
-		padding: 0.1rem 0;
-		margin: 0 var(--lumo-space-m);
-		background-color: gray;
-		color: white;
-		
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-	.esra-wl-tag vaadin-icon, 
-	.esra-wl-tag iron-icon {
-		height: calc(var(--lumo-icon-size-m) - .2rem);
-	}
-	
-	.esra-watchlist-tag {
-		color: white;
-		font-size: 10px;
-		font-weight: bold;
-		padding: 0 1em;
-		line-height: 20px;
-		text-align: center;
-		border-radius: .8em;
-		margin: 0 .3em;
-	}
-	.esra-watchlist-grid-actioncell {
-		margin: unset;
-	}
-	
-	.esra-watchlist-details-text {
-		white-space: pre-wrap;
-		word-wrap: break-word;
-		overflow-wrap: break-word;
-		-moz-hyphens: auto;
-		-webkit-hyphens: auto;
-		-ms-hyphens: auto;
-		hyphens: auto;
-	}
-
-/** A div as (css) Grid **/
-	div.asGrid {
-	  display: grid;
-	  grid-auto-flow: column;
-	  justify-content: start;
-	  align-items: baseline;
-	}
-	div.asGrid.spacing {
-		grid-gap: var(--lumo-space-m);
-	}
-	
-	div.asGrid.twoCol {
-		grid-auto-flow: row !important;
-		grid-template-columns: auto 1fr;
-	}
-	
-	div.withGridGap {
-		grid-gap: var(--lumo-space-m);
-	}
-
-/**** inner scroll - see also "custom-accordion-panel" and "custom-details" ****/
-	.esra-common-innerscroll {
-	 	display: flex;
-		flex-direction: column; 
-	 }
-	 
-/**** Screening search: Matches result ****/
-	.esra-matchListingItem div {
-		display: flex;
-		align-items: center;
-		min-height: var(--lumo-size-s);
-		grid-gap: var(--lumo-space-m);
-	}
- 
-.v-loading-indicator::after {
-  content: "";
-  position: fixed; /* Occupy whole screen even if scrolled */
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  /* Eat mouse events when visible, doesn't prevent scrolling */
-  pointer-events: auto;
-  /* Animated with delay to prevent flashing */
-  animation: fadein 0.3s ease-out 0.2s normal 1 both;
-  z-index: 2147483647;
-  cursor: wait;
-}
-.v-loading-indicator[style*=none]::after {
-	display: none;
+html {
 }
 
-@keyframes fadein {
-  0% {
-    background: rgba(0,0,0,0);
-  }
-  100% {
-    background: rgba(0,0,0,.1); /* Darkens the UI */
-  }
+[theme~="dark"] {
+  --lumo-shade-5pct: rgba(26, 26, 26, 0.05);
+  --lumo-shade-10pct: rgba(26, 26, 26, 0.1);
+  --lumo-shade-20pct: rgba(26, 26, 26, 0.2);
+  --lumo-shade-30pct: rgba(26, 26, 26, 0.3);
+  --lumo-shade-40pct: rgba(26, 26, 26, 0.4);
+  --lumo-shade-50pct: rgba(26, 26, 26, 0.5);
+  --lumo-shade-60pct: rgba(26, 26, 26, 0.6);
+  --lumo-shade-70pct: rgba(26, 26, 26, 0.7);
+  --lumo-shade-80pct: rgba(26, 26, 26, 0.8);
+  --lumo-shade-90pct: rgba(26, 26, 26, 0.9);
+  --lumo-primary-text-color: rgb(235, 89, 5);
+  --lumo-primary-color-50pct: rgba(235, 89, 5, 0.5);
+  --lumo-primary-color-10pct: rgba(235, 89, 5, 0.1);
+  --lumo-error-text-color: rgb(231, 24, 24);
+  --lumo-error-color-50pct: rgba(231, 24, 24, 0.5);
+  --lumo-error-color-10pct: rgba(231, 24, 24, 0.1);
+  --lumo-success-text-color: rgb(62, 229, 170);
+  --lumo-success-color-50pct: rgba(62, 229, 170, 0.5);
+  --lumo-success-color-10pct: rgba(62, 229, 170, 0.1);
+  --lumo-shade: hsl(0, 0%, 10%);
+  --lumo-primary-color: hsl(22, 96%, 47%);
+  --lumo-error-color: hsl(0, 81%, 50%);
+  --lumo-success-color: hsl(159, 76%, 57%);
+  --lumo-success-contrast-color: hsl(159, 29%, 10%);
 }
-</style>
+
+  </style>
 </custom-style>
