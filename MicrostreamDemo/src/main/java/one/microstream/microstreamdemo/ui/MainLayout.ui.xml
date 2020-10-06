@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<?xdevuiml version="1.0"?>
+<?template NONE?>
+<?import com.vaadin.flow.component.button.Button?>
+<?import com.vaadin.flow.component.grid.Grid?>
+<?import com.vaadin.flow.component.orderedlayout.HorizontalLayout?>
+<?import com.vaadin.flow.component.orderedlayout.VerticalLayout?>
+<?import one.microstream.microstreamdemo.storage.Customer?>
+<VerticalLayout xmlns:x="http://xml.xdev-software.com/xdevuiml" x:name="MainLayout" defaultHorizontalComponentAlignment="com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment.STRETCH" x:route="">
+    <x:constraints zpos="0" width="100%" height="100%" />
+    <HorizontalLayout x:name="horizontalLayout">
+        <x:constraints width="100%" height="-1px" flex-grow="0.0" />
+        <Button x:name="button" text="Import Data">
+            <x:constraints width="0px" height="0px" flex-grow="0.0" />
+            <x:event>click.onComponentEvent</x:event>
+        </Button>
+        <Button x:name="button2" text="Store imported">
+            <x:constraints width="0px" height="0px" flex-grow="0.0" />
+            <x:event>click.onComponentEvent</x:event>
+        </Button>
+        <Button x:name="button5" text="Show all">
+            <x:constraints width="0px" height="0px" flex-grow="0.0" />
+            <x:event>click.onComponentEvent</x:event>
+        </Button>
+        <Button x:name="button3" text="Edit selected">
+            <x:constraints width="0px" height="0px" flex-grow="0.0" />
+            <x:event>click.onComponentEvent</x:event>
+        </Button>
+        <Button x:name="button4" text="Delete selected">
+            <x:constraints width="0px" height="0px" flex-grow="0.0" />
+            <x:event>click.onComponentEvent</x:event>
+        </Button>
+        <Button x:name="button6" text="Show females">
+            <x:constraints width="0px" height="0px" flex-grow="0.0" />
+            <x:event>click.onComponentEvent</x:event>
+        </Button>
+        <Button x:name="button7" text="Clear All Entries">
+            <x:constraints width="0px" height="0px" flex-grow="0.0" />
+            <x:event>click.onComponentEvent</x:event>
+        </Button>
+    </HorizontalLayout>
+    <Grid x:themeVariants="LUMO_ROW_STRIPES LUMO_COMPACT" x:name="grid">
+        <x:typeArguments>
+            <typeArgument type="Customer" />
+        </x:typeArguments>
+        <x:constraints width="100%" height="100%" flex-grow="1.0" />
+        <x:columns>
+            <column property="id" sortable="true" />
+            <column property="lastname" sortable="true" />
+            <column property="firstname" sortable="true" />
+            <column property="gender" sortable="true" />
+            <column property="mail" sortable="true" />
+            <column property="ipAddress" sortable="true" />
+        </x:columns>
+    </Grid>
+</VerticalLayout>
