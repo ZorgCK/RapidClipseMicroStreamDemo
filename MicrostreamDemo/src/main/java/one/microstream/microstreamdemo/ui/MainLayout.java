@@ -1,21 +1,19 @@
 
 package one.microstream.microstreamdemo.ui;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.reflect.Type;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.rapidclipse.framework.server.resources.ApplicationResource;
 import com.rapidclipse.framework.server.resources.CaptionUtils;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEvent;
@@ -65,14 +63,20 @@ public class MainLayout extends VerticalLayout implements PageConfigurator
 	 */
 	private void btnImportData_onClick(final ClickEvent<Button> event)
 	{
-		final String mockupFileContent = MainLayout.getMockupFileContent().get();
+		try
+		{
+			final Type listType = new TypeToken<Set<Customer>>()
+			{}.getType();
+			this.customers.clear();
+			this.customers = new Gson().fromJson(this.getMockupFileContent(), listType);
+
+			this.grid.setItems(this.customers);
+		}
+		catch(final IOException e)
+		{
+			e.printStackTrace();
+		}
 		
-		final Type listType = new TypeToken<Set<Customer>>()
-		{}.getType();
-		this.customers.clear();
-		this.customers = new Gson().fromJson(mockupFileContent, listType);
-		
-		this.grid.setItems(this.customers);
 	}
 	
 	/**
@@ -126,7 +130,6 @@ public class MainLayout extends VerticalLayout implements PageConfigurator
 		final Customer value = this.grid.asSingleSelect().getValue();
 		
 		DB.root.getCustomers().remove(value);
-		
 		DB.storageManager.store(DB.root.getCustomers());
 		
 		this.grid.getDataProvider().refreshAll();
@@ -222,7 +225,7 @@ public class MainLayout extends VerticalLayout implements PageConfigurator
 		this.btnQueryFemales.addClickListener(this::btnQueryFemales_onClick);
 		this.btnClearEntries.addClickListener(this::btnClearEntries_onClick);
 	} // </generated-code>
-
+	
 	// <generated-code name="variables">
 	private Button           btnImportData, btnStoreData, btnShowDBContent, btnEditSelected, btnDeleteSelected,
 		btnQueryFemales, btnClearEntries;
@@ -230,20 +233,22 @@ public class MainLayout extends VerticalLayout implements PageConfigurator
 	private Grid<Customer>   grid;
 	// </generated-code>
 	
-	public static Optional<String> getMockupFileContent()
+	public String getMockupFileContent() throws IOException
 	{
-		final Path          filepath =
-			Paths.get("C:/MOCK_DATA.json");
-		final StringBuilder sb       = new StringBuilder();
-		try(Stream<String> stream = Files.lines(filepath, StandardCharsets.UTF_8))
+		final InputStream is =
+			ApplicationResource.createInputStream(
+				this.getClass(), "/mockup/MOCK_DATA.json");
+
+		final BufferedReader streamReader       = new BufferedReader(new InputStreamReader(is));
+		final StringBuilder  responseStrBuilder = new StringBuilder();
+		String               inputString;
+		while((inputString = streamReader.readLine()) != null)
 		{
-			stream.forEach(s -> sb.append(s).append("\n"));
-			return Optional.of(sb.toString());
+			responseStrBuilder.append(inputString);
 		}
-		catch(final IOException e)
-		{
-			return Optional.empty();
-		}
+		
+		streamReader.close();
+		return responseStrBuilder.toString();
 	}
 	
 	public static String escapeStringAsFilename(final String inputName)

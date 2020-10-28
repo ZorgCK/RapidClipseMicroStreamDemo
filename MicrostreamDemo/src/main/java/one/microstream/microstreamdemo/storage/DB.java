@@ -9,7 +9,7 @@ public final class DB
 {
 	public static DataRoot               root = new DataRoot();
 	public static EmbeddedStorageManager storageManager;
-	
+
 	static
 	{
 		DB.storageManager = Configuration.LoadXml(
